@@ -1,0 +1,19 @@
+# === 隐私与版权红线：绝不推送到公开仓库 ===
+# 含原始平台ID / 评论原文 / 用户内容
+data/social_comments_clean.csv
+data/tokens.csv
+analysis.db
+
+# === 原始采集数据（含私有ID，本地保留，不入库）===
+*.xlsx
+
+# === 系统与临时文件 ===
+.DS_Store
+__pycache__/
+*.pyc
+r/analysis.R3v7uhE
+
+# === R 环境 ===
+.Rhistory
+.RData
+.Rproj.user/
