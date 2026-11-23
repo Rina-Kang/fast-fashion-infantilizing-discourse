@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Yuchen Kang">
+<meta name="dcterms.date" content="2026-11-01">
+
+<title>What Shapes Purchase Intent for ‘Youthful, Body-Revealing’ Fast Fashion? A Keyword and Comparison Analysis of Social-Media Feedback</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="report_files/libs/clipboard/clipboard.min.js"></script>
+<script src="report_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="report_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="report_files/libs/quarto-html/popper.min.js"></script>
+<script src="report_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="report_files/libs/quarto-html/anchor.min.js"></script>
+<link href="report_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="report_files/libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="report_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="report_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="report_files/libs/bootstrap/bootstrap-917079515d91bccb85b543faf8aa8bb6.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">What Shapes Purchase Intent for ‘Youthful, Body-Revealing’ Fast Fashion? A Keyword and Comparison Analysis of Social-Media Feedback</h1>
+<p class="subtitle lead">A data-driven analysis of 7,900+ social-media comments</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Yuchen Kang </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">November 1, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="why-i-started-the-research-question" class="level1">
+<h1>1. Why I Started &amp; The Research Question</h1>
+<p>In summer 2026, I noticed that shopping malls in my city had begun prominently selling clothing that pairs a youthful look with a body-revealing style — think “纯欲风” (pure-desire) and “辣妹装” (spicy-girl) — and that these stores were crowded. It made me wonder: <strong>do the people buying these clothes realise what they are buying? How do they actually think about it?</strong></p>
+<p>So I collected and analysed social-media comments about this aesthetic, asking: <strong>what drives consumers to buy it, and how do they evaluate it once they own it?</strong></p>
+<p>This project is deliberately narrow: I study the consumers who <em>already choose</em> this style — not whether they should, or whether the style is “right.” I wanted to understand, on their own terms, what they focus on when they buy and wear these clothes.</p>
+</section>
+<section id="abstract-conclusion-first" class="level1">
+<h1>2. Abstract (Conclusion First)</h1>
+<p>After cleaning and analysing <strong>7,867 de-identified comments</strong> (from Xiaohongshu and Douyin), I found that:</p>
+<blockquote class="blockquote">
+<p><strong>The consumers who choose this style rarely engage with it as a <em>political</em> or <em>ethical</em> question. They talk about it the way anyone talks about clothes — fit, price, whether it flatters them, whether they can actually wear it out.</strong></p>
+</blockquote>
+<p>Their evaluations centre on the <em>physical reality of wearing it</em>: fabric quality, exposure/wardrobe-malfunction, and social wearability — which are sharply higher complaints for this category than for a matched control set (athleisure / office / yoga wear). Fit and comfort, by contrast, are <strong>universal</strong> complaints across all women’s clothing.</p>
+<p>The near-absence of <em>aesthetic or ethical</em> debate is itself the finding — but it must be read carefully: these are people who already chose to engage with this style. Their silence on its politics does not mean the style is uncontroversial; it means that, <em>for the people in this data</em>, the purchase is not framed as a political act at all.</p>
+</section>
+<section id="data-method" class="level1">
+<h1>3. Data &amp; Method</h1>
+<section id="data-pipeline" class="level2">
+<h2 class="anchored" data-anchor-id="data-pipeline">3.1 Data pipeline</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Stage</th>
+<th>Tool</th>
+<th>Output</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Raw collection</td>
+<td>manual + scripted (documented protocol)</td>
+<td>~7,900 comments</td>
+</tr>
+<tr class="even">
+<td>Cleaning</td>
+<td>Python (<code>csv</code>)</td>
+<td>7,867 unique, de-identified</td>
+</tr>
+<tr class="odd">
+<td>Database</td>
+<td>SQLite (<code>schema.sql</code>)</td>
+<td>3 tables, indexed</td>
+</tr>
+<tr class="even">
+<td>Segmentation</td>
+<td>Python (<code>jieba</code>)</td>
+<td>6,571 usable token rows</td>
+</tr>
+<tr class="odd">
+<td>Analysis</td>
+<td>R (<code>dplyr</code>, <code>ggplot2</code>)</td>
+<td>figures</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="how-the-data-was-collected" class="level2">
+<h2 class="anchored" data-anchor-id="how-the-data-was-collected">3.2 How the data was collected</h2>
+<p>Collection followed a fixed protocol — not ad-hoc grabbing. Both platforms used the <strong>same search terms</strong>, and the top ~15 high-engagement posts per term were sampled.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Platform</th>
+<th>Method</th>
+<th>Search terms (examples)</th>
+<th>Post selection</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Xiaohongshu &amp; Douyin</td>
+<td>manual + scripted</td>
+<td>neutral style terms (<code>纯欲风穿搭</code>, <code>辣妹装</code>…), complaint/conflict terms (<code>走光</code>, <code>勒肉</code>, <code>身材焦虑</code>…), “awakening” terms (<code>反容貌焦虑</code>, <code>悦己穿搭</code>…)</td>
+<td>top ~15 high-engagement posts per term</td>
+</tr>
+<tr class="even">
+<td>Xiaohongshu &amp; Douyin (control)</td>
+<td>manual + scripted</td>
+<td><code>运动风穿搭</code>, <code>通勤风穿搭</code>, <code>瑜伽穿搭</code>, <code>职场穿搭</code>…</td>
+<td>top ~15 high-engagement posts per term</td>
+</tr>
+</tbody>
+</table>
+<p>The directed track additionally targeted six store accounts by name. The control set (athleisure/office/yoga) was collected to test whether the complaint patterns are <em>specific</em> to this category or common to all women’s wear.</p>
+</section>
+<section id="the-key-methodological-decision-matching-on-search-terms" class="level2">
+<h2 class="anchored" data-anchor-id="the-key-methodological-decision-matching-on-search-terms">3.3 The key methodological decision: matching on search terms</h2>
+<p>This is the heart of the analysis, and it came from a real problem I hit:</p>
+<ul>
+<li>My main sample was collected using <strong>search terms with a built-in stance</strong> — some neutral (“纯欲风穿搭”), but many negative (“辣妹装翻车”, “走光”, “勒肉”). This would <em>systematically inflate</em> complaint rates.</li>
+<li>My control group (athleisure/office/yoga) was collected using <strong>only neutral style terms</strong>.</li>
+</ul>
+<p>To make the comparison <strong>fair</strong>, I re-ran the analysis using <strong>only the 6 neutral style terms</strong> from the main sample (<code>纯欲风穿搭 / 幼态感穿搭 / 甜辣风穿搭 / 斩男穿搭 / 微胖穿搭 / 辣妹装</code>), matched against the neutral control terms. This removes the “search-term stance” bias and leaves only the <em>category</em> difference.</p>
+</section>
+</section>
+<section id="core-finding" class="level1">
+<h1>4. Core Finding</h1>
+<p>I counted complaint-words across <strong>five dimensions</strong> and compared the two groups, standardising by “hits per 1,000 comments” (since sample sizes differ: 989 vs 582).</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="report_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="912"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>What the chart shows:</strong></p>
+<ul>
+<li><strong>Fabric quality: 5× higher</strong> in the youthful, body-revealing group (34.4 vs 6.9)</li>
+<li><strong>Wearability / occasion: 2.5× higher</strong> (17.2 vs 6.9)</li>
+<li><strong>Exposure / wardrobe-malfunction: 1.8× higher</strong> (12.1 vs 6.9)</li>
+<li><strong>Fit / cut and physical comfort: no meaningful gap</strong> — these are universal complaints</li>
+</ul>
+<p>The takeaway: <strong>these consumers are not debating the “pure-desire/spicy-girl” aesthetic — they are buying a look they hope flatters them, and judging it on whether it actually does.</strong> Their complaints (cheap, exposing, impractical) are complaints about <em>execution</em>, not about <em>the idea</em>.</p>
+<p><strong>The words themselves tell the same story.</strong> In the neutral-search main sample (989 comments), <em>embodied/experiential</em> words (短 / 紧 / 显胖 / 版型 / 尴尬 / 土…) outnumber <em>abstract-aesthetic</em> words (审美 / 物化 / 幼态…) by roughly <strong>16:1 (95 vs 6 occurrences)</strong>. Consumers almost never frame their experience in aesthetic or ethical terms — they describe the <em>felt reality</em> of wearing it.</p>
+<p>One caveat I want to state plainly: <strong>“youthful, body-revealing” is <em>my</em> analytic label, not theirs.</strong> The people in this data do not describe what they buy that way. They talk about clothes; I am the one applying an analytic frame. Keeping that distinction honest is the most important discipline of this project.</p>
+</section>
+<section id="what-i-explored-and-why-it-didnt-survive" class="level1">
+<h1>5. What I Explored and Why It Didn’t Survive</h1>
+<p>The most valuable part of this project was not the conclusion — it was the process of ruling things out. Three hypotheses were tested and honestly abandoned:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Hypothesis</th>
+<th>Why it failed</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>“Consumers are <em>covertly</em> resisting the youthful styling (saying ‘cheap’ when they mean ‘problematic’)”</td>
+<td>Direct mentions of the aesthetic (幼态/扮嫩/像小孩) appeared in only <strong>21 of 7,867</strong> comments — no textual evidence</td>
+</tr>
+<tr class="even">
+<td>“The core pain point is poor <em>fit</em>”</td>
+<td>Control-group comparison showed fit complaints are <strong>equally high</strong> in athleisure — it’s universal, not specific</td>
+</tr>
+<tr class="odd">
+<td>“The unique pain is <em>physical discomfort</em> (3.9× higher)”</td>
+<td>Turned out to be an artefact of my <strong>negative search terms</strong> — disappeared once I matched on neutral terms</td>
+</tr>
+</tbody>
+</table>
+<p>This “elimination” process is what gives the final conclusion its credibility: it survives not because it was my first idea, but because it was the one that <em>remained</em> after honest testing.</p>
+</section>
+<section id="limitations-ethics" class="level1">
+<h1>6. Limitations &amp; Ethics</h1>
+<p><strong>Methodological</strong></p>
+<ul>
+<li><strong>Selection on the outcome.</strong> The sample only contains people who <em>already engaged with</em> this style — buying or commenting presupposes some acceptance of it. People strongly averse to the youthful, body-revealing look (who would refuse to wear it) are systematically absent. So “consumers don’t debate the aesthetic” is better read as: <em>among those who engage with it, the purchase is not framed as a political act.</em></li>
+<li><strong>Sampling is non-probabilistic</strong> (top ~15 high-engagement posts per term). Conclusions describe the <em>conflict discourse</em>, not population-wide attitudes.</li>
+<li><strong>High-engagement ≠ organic.</strong> On Xiaohongshu — a recommendation / soft-advertising platform — top posts are often promotions or sponsored content, which may skew the sample toward <em>positive</em> praise.</li>
+<li><strong>The topic itself is sensitive.</strong> “Sexiness” is private and socially loaded, so users may not disclose their real feelings about it; the text may under-represent genuine discomfort. (No sensitive personal data was collected.)</li>
+<li><strong>Search terms carry a built-in stance.</strong> Negative terms (“走光”, “勒肉”) inflate complaint rates; I corrected this by matching on neutral terms, but some residual bias may remain.</li>
+<li><strong>The control group is smaller (n=582)</strong> and the Douyin portion was partially contaminated and excluded; treat it as directional evidence.</li>
+<li><strong>Keyword matching over-counts ambiguous words</strong> (“大”/“小” can be neutral), so complaint rates are approximate.</li>
+<li><strong>Word-frequency analysis has no semantic context</strong> — it cannot detect sarcasm, negation, or implicit stance.</li>
+</ul>
+<p><strong>Ethics &amp; privacy</strong></p>
+<ul>
+<li>All authors de-identified (U001…), store names pseudonymised (Store-A…F), raw IDs and full comment text excluded from the public repo.</li>
+</ul>
+</section>
+<section id="conclusion-business-implication" class="level1">
+<h1>7. Conclusion &amp; Business Implication</h1>
+<p>If these consumers are not debating the aesthetic — they are buying “a look that flatters them” — then the opportunity is clear:</p>
+<blockquote class="blockquote">
+<p><strong>The next brand does not need to argue about the aesthetic. It needs to deliver the promise the aesthetic makes.</strong> Make “纯欲/辣妹” clothes that are <em>quality fabric, non-exposing, and wearable in normal life</em>, and you serve the demand that is currently being frustrated by cheap, impractical products.</p>
+</blockquote>
+<p>The insight reframes the category from “a morally controversial trend” into “a promise being badly executed” — which is exactly the kind of framing a business can act on.</p>
+</section>
+<section id="why-do-they-buy-it-three-open-hypotheses" class="level1">
+<h1>8. Why Do They Buy It? Three Open Hypotheses</h1>
+<p>This data shows <em>what</em> these consumers talk about, not <em>why</em> they buy. The following are <strong>hypotheses — directions to test next, not conclusions</strong>. Each is paired with the faint signal I can already see in the data.</p>
+<ol type="1">
+<li><strong>A shortcut to being seen as attractive.</strong> They may buy to meet a mainstream standard of beauty — “flattering,” “a good figure” (好看/身材 dominate the comments). <em>Business angle:</em> the product is sold as a fast path to approval, not as self-expression.</li>
+<li><strong>Youth as desirability.</strong> The youthful appeal may trade on the equation <em>younger-looking = more desirable</em>. <em>Business angle:</em> a youthful look is packaged as a premium, and consumers buy the promise of looking “sweet-but-alluring.”</li>
+<li><strong>Cheap experimentation.</strong> Fast fashion’s low price makes trying a youthful, body-revealing look a near-zero-risk trial. <em>Business angle:</em> the “cheap” that drives complaints is also what drives trial — a paradox a brand could exploit or resolve.</li>
+</ol>
+</section>
+<section id="future-work" class="level1">
+<h1>9. Future Work</h1>
+<ul>
+<li><strong>Demographic segmentation.</strong> The current sample has no age, region, or education labels. Re-collecting with these dimensions would let me test whether the evaluation patterns differ across consumer groups (e.g.&nbsp;by age cohort or city tier).</li>
+<li><strong>Richer signal.</strong> Adding engagement weighting (like-counts) or sentiment scores would distinguish <em>how much resonance</em> a comment has, not just <em>whether</em> it appears.</li>
+<li><strong>Qualitative depth.</strong> Reading a stratified sample of full comment threads could test whether the near-absence of aesthetic debate reflects genuine indifference, or discomfort that is hard to articulate.</li>
+</ul>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
